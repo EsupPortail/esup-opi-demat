@@ -1,0 +1,211 @@
+
+
+<web-app>
+<!--  Variables de contexte -->
+	<context-param>
+		<param-name>titre</param-name>
+		<param-value>candidatures</param-value>
+	</context-param>
+	<context-param>
+		<param-name>tailleMaxFichier</param-name>
+		<param-value>20971520</param-value>
+	</context-param>
+	
+<!-- La durée de la session -->
+	<session-config>
+	    <session-timeout>30</session-timeout>
+	</session-config>
+	
+<!--  la redirection des erreur, à mettre en commentaire pour debuger 
+	<error-page>
+		<error-code>500</error-code>
+		<location>/erreurSQL.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>501</error-code>
+		<location>/erreurSQL.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>502</error-code>
+		<location>/erreurSQL.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/erreurSQL.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>504</error-code>
+		<location>/erreurSQL.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>505</error-code>
+		<location>/erreurSQL.jsp</location>
+	</error-page>
+	
+	
+	<error-page>
+		<error-code>400</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+			
+		<error-code>401</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>402</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>406</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>407</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>408</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>409</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>410</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>411</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>412</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>413</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>414</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>415</error-code>
+		<location>/erreurClient.jsp</location>
+	</error-page> -->
+	
+<!-- indiquation de la page d'acceil -->
+	
+	<welcome-file-list>
+		<welcome-file>accueilReferent.jsp</welcome-file>
+	</welcome-file-list>
+	
+<!-- les mappings -->
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.LoginReferent_servlet</servlet-class>
+		<servlet-name>ServletOne</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.ListCandidat_servlet</servlet-class>
+		<servlet-name>ServletTwo</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.Deconnection_servlet</servlet-class>
+		<servlet-name>ServletThree</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.ValidationNomPrenom_servlet</servlet-class>
+		<servlet-name>ServletFour</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.Telechargement_servlet</servlet-class>
+		<servlet-name>ServletFive</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.Etudiant_servlet</servlet-class>
+		<servlet-name>ServletSix</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.NomPrenomRef_servlet</servlet-class>
+		<servlet-name>ServletSeven</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.Identification_servlet</servlet-class>
+		<servlet-name>ServletEight</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.ChoixMDP_servlet</servlet-class>
+		<servlet-name>ServletNine</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.EnregitrementMDP_servlet</servlet-class>
+		<servlet-name>ServletTen</servlet-name>
+	</servlet>
+	<servlet>
+		<servlet-class>com.lr_mvc.controller.GenerationLien_servlet</servlet-class>
+		<servlet-name>ServletEleven</servlet-name>
+	</servlet>
+	
+	
+	<servlet-mapping>
+		<servlet-name>ServletOne</servlet-name>
+		<url-pattern>/loginReferent</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletTwo</servlet-name>
+		<url-pattern>/listCandidat</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletThree</servlet-name>
+		<url-pattern>/deconnection</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletFour</servlet-name>
+		<url-pattern>/validationNomPrenom</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletFive</servlet-name>
+		<url-pattern>/telechargement</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletSix</servlet-name>
+		<url-pattern>/etudiant</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletSeven</servlet-name>
+		<url-pattern>/nomPrenomRef</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletEight</servlet-name>
+		<url-pattern>/identification</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletNine</servlet-name>
+		<url-pattern>/choixMDP</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletTen</servlet-name>
+		<url-pattern>/enregistrementMDP</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletEleven</servlet-name>
+		<url-pattern>/generationLien</url-pattern>
+	</servlet-mapping>
+	
+	
+</web-app>

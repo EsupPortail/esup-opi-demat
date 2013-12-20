@@ -1,0 +1,94 @@
+
+@import url("/candidatures/media/style/opiR1_header.css");
+
+@import url("/candidatures/media/style/opiR1_navigation.css");
+
+@import url("/candidatures/media/style/opiR1_global.css");
+
+@import url("/candidatures/media/commons.css");
+
+@import url("/candidatures/media/portlet.css");
+
+/*
+@import url("opiR1_header.css");
+
+@import url("opiR1_navigation.css");
+
+@import url("opiR1_global.css");
+
+@import url("../commons.css");
+
+@import url("../portlet.css");
+*/
+.esup-opiR1 div.salahddine_welcomeInfoFirstConnexion {
+	border: 1px solid #b7b6b6;
+	background-color: #f9f9f9;
+	padding: 5px;
+	width: 500px;
+	height: 120px;
+	text-align: left;
+	margin-left: 32%;
+	margin-right: 35%;
+}
+
+.esup-opiR1 div.salahddine_welcomeInfoFirstConnexion2 {
+	border: 1px solid #b7b6b6;
+	background-color: #f9f9f9;
+	padding: 5px;
+	width: 540px;
+	height: 120px;
+	text-align: left;
+	margin-left: 32%;
+	margin-right: 35%;
+}
+
+.esup-opiR1 .section-subheader2 {
+/* MAG */
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+font-size: 60%;
+color: #FFFFFF;
+margin-top: 4px;
+margin-right: 0pt;
+margin-bottom: 4px;
+margin-left: 0pt;
+padding-top: 2px;
+padding-right: 2pt;
+padding-bottom: 2px;
+padding-left: 2pt;
+	background-color: gray;
+text-transform : none;
+/* MAG */
+}
+
+
+.form 	input[type=submit]{
+	background:url(/DE_MVC/image/icone_modifier.gif) top right no-repeat;
+	width:20px;
+	height: 18px;
+	padding: 0 0 0 10px;
+	cursor: pointer;
+	border:0;
+	
+}
+
+label
+{
+    font-family: Verdana, sans-serif;
+    width: 100px;
+    float: left;
+    margin-left: 550px;
+}
+
+a.rubrique {
+	color: black;
+	font-size: 11px;
+}
+
+a.rubrique:visited {
+	color: black;
+}
+
+a.rubrique:hover{
+	color: black;
+}

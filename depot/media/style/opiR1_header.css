@@ -1,0 +1,96 @@
+.esup-opiR1 div.header {
+r: #333333;
+        right : 0%
+        top: 10%;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+	padding-left: 0px;
+	padding-top: 0pt;
+	padding-right: 0px;
+	padding-bottom: 0pt;
+	margin-left: 0px;
+	margin-top: 0;
+	margin-right: 0px;
+	margin-bottom: 0pt;
+	width: auto;
+	height: 80px;
+
+}
+
+.esup-opiR1 div.header div.logo {
+	background-image: url("/DE_MVC/media/images/logo-dauphine.jpg");
+	width: 171px;
+        height: 68px;
+	background-repeat: no-repeat;
+
+}
+
+.esup-opiR1 div.header div.header_suite {
+	background-repeat: no-repeat;
+
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli {
+	position:absolute;
+	left:20%;
+	top : 20%;
+	height: 50px;
+        width: 50%;
+	background-image: url("/DE_MVC/media/images/logoPSLstar_RU_rvb.png");
+	background-repeat: no-repeat;
+
+}
+
+
+
+.esup-opiR1 div.header div.header_suite div.titreAppli .span_bigTitre {
+        position:absolute;
+        left:45%;
+	top : 0%
+	color: black;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli .span_titre {
+        position:absolute;
+        left:38%;
+        top : 35%;
+	color: #333333;
+        font-weight: bold;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+}
+
+
+.esup-opiR1 div.header div.header_suite div.user_displayName {
+	position:absolute;
+        left:80%;
+        top : 20%;
+        width: 49%;
+}
+
+.esup-opiR1 div.header div.header_suite div.version {
+	position:absolute;
+        left:65%;
+        top : 0%;
+        height: 80px;
+	width: 150px;
+	background-image: url("/DE_MVC/media/images/EFMD.png");
+	background-repeat: no-repeat;
+
+}
+
+.esup-opiR1 div.header div.header_suite .span_currentUser {
+	color: #333333;
+        right : 0%;
+        top: 10%;
+        font-weight: bold;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+
+}
+
+.esup-opiR1 div.header div.header_suite .span_version {
+}

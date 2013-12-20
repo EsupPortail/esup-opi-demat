@@ -1,0 +1,107 @@
+.esup-opiR1 div.header {
+r: #333333;
+        right : 0%
+        top: 10%;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+	padding-left: 0px;
+	padding-top: 0pt;
+	padding-right: 0px;
+	padding-bottom: 0pt;
+	margin-left: 0px;
+	margin-top: 0;
+	margin-right: 0px;
+	margin-bottom: 0pt;
+	width: auto;
+	height: 80px;
+
+}
+
+.esup-opiR1 div.header div.logo {
+	position: absolute;
+	width: 171px;
+	height: 68px;
+	background-image: url("/candidatures/media/images/logo-dauphine.jpg");
+	background-repeat: no-repeat;
+}
+
+.esup-opiR1 div.header div.header_suite {
+	position: relative;
+	left : 200px;
+        width: 171px;
+        height: 68px;
+        background-image: url("/candidatures/media/images/");
+        background-repeat: no-repeat;
+
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli {
+        text-align: center;
+	background-image: url("/candidatures/media/images/logoPSLstar_RU_rvb.png");
+        padding-top: 30%;
+	float: left;
+	margin-top: 10%;
+	margin-right: 12%;
+	margin-left: 50%;
+	width: 50%;
+	height: 20%;
+	background-repeat: no-repeat;
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli .span_bigTitre {	
+	color: black;
+	font-size: 18px;
+	text-align: right;
+	position: absolute;
+        width: 49%;
+        left: 200%;
+        top: 10%;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli .span_titre {
+	color: #333333;
+        text-align: right;
+        position: absolute;
+        width: 70%;
+        left: 205%;
+        top: 50%;
+        font-weight: bold;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.esup-opiR1 div.header div.header_suite div.user_displayName {
+	vertical-align:top;
+	text-align: right;
+        width: 49%;
+        top: 10%;
+}
+
+.esup-opiR1 div.header div.header_suite div.version {
+	position: relative;
+	text-align: right;
+	background-image: url("/candidatures/media/images/EFMD.png");
+        width: 70%;
+        height: 110%;
+        background-repeat: no-repeat;
+        left : 450%;
+        top: 10%;
+}
+
+.esup-opiR1 div.header div.header_suite .span_currentUser {
+	color: #333333;
+        right : 0%
+        top: 10%;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+}
+
+.esup-opiR1 div.header div.header_suite .span_version {
+	color: black;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}

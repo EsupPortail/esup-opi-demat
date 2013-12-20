@@ -1,0 +1,12 @@
+#Wed Jul 17 11:28:31 CEST 2013
+eclipse.preferences.version=1
+encoding//WEB-INF/src/EtablissementMetier_08062007/servicesmetiers/commun/apogee/education/gouv/EtablissementMetierServiceInterface.java=UTF-8
+encoding//WEB-INF/src/EtablissementMetier_08062007_impl/servicesmetiers/commun/apogee/education/gouv/EtablissementMetierServiceInterfaceService.java=UTF-8
+encoding//WEB-INF/src/EtablissementMetier_08062007_impl/servicesmetiers/commun/apogee/education/gouv/EtablissementMetierServiceInterfaceServiceLocator.java=UTF-8
+encoding//WEB-INF/src/EtablissementMetier_08062007_impl/servicesmetiers/commun/apogee/education/gouv/EtablissementMetierSoapBindingStub.java=UTF-8
+encoding//WEB-INF/src/gouv/education/apogee/commun/transverse/dto/etablissement/AcademieDTO/AcademieDTO.java=UTF-8
+encoding//WEB-INF/src/gouv/education/apogee/commun/transverse/dto/etablissement/DepartementDTO/DepartementDTO.java=UTF-8
+encoding//WEB-INF/src/gouv/education/apogee/commun/transverse/dto/etablissement/EtablissementCompletDTO/EtablissementCompletDTO.java=UTF-8
+encoding//WEB-INF/src/gouv/education/apogee/commun/transverse/dto/etablissement/PaysDTO/PaysDTO.java=UTF-8
+encoding//WEB-INF/src/gouv/education/apogee/commun/transverse/dto/etablissement/TypeEtablissementDTO/TypeEtablissementDTO.java=UTF-8
+encoding//WEB-INF/src/gouv/education/apogee/commun/transverse/exception/WebBaseException.java=UTF-8

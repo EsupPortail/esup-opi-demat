@@ -1,0 +1,540 @@
+<%@ include  file="header.jsp"%>
+<%@ include  file="menu.jsp"%>
+<%@ page import="java.util.ArrayList, java.util.Map, java.util.TreeMap, java.io.File, java.util.Properties" %>
+<%
+String idUsr = session.getAttribute("idUsr").toString();
+//ArrayList<String> listLibNomsPc = (ArrayList<String>)request.getAttribute("listLibNomsPc");
+//ArrayList<String> listCodeNomsPc = (ArrayList<String>) request.getAttribute("listCodeNomsPc");
+ArrayList<String> listCodeEtapes = (ArrayList<String>) request.getAttribute("listCodeEtapes");
+ArrayList<String> listCodeVets = (ArrayList<String>) request.getAttribute("listCodeVets");
+ArrayList<String> listIdUsrNoFileUploaded = (ArrayList<String>)request.getAttribute("listIdUsrNoFileUploaded");
+ArrayList<String> listDesEtudiantsAAffiche = (ArrayList<String>)request.getAttribute("listDesEtudiantsAAffiche");
+ArrayList<String> listDesEtudiantsAAfficheParProvenance = (ArrayList<String>)request.getAttribute("listDesEtudiantsAAfficheParProvenance");
+ArrayList<String> listDesEtudiantsAAfficheParAvis = (ArrayList<String>)request.getAttribute("listDesEtudiantsAAfficheParAvis");
+ArrayList<String> listEmplacements = (ArrayList<String>)request.getAttribute("listEmplacements");
+ArrayList<String> listFichiersAAffiche = (ArrayList<String>)request.getAttribute("listFichiersAAffiche");
+ArrayList<String> listLicNomAvis = (ArrayList<String>)request.getAttribute("listLicNomAvis");
+ArrayList<String> listCodeFile = (ArrayList<String>)request.getAttribute("listCodeFile");
+//Map<String, ArrayList<String>> MapCodeEtapeCodeNomPs = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapCodeEtapeCodeNomPs");
+//Map<String, ArrayList<String>> MapCodeEtapeLibNomPs = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapCodeEtapeLibNomPs");
+Map<String, ArrayList<String>> MapCodeEtapeIdUsrEtudiant = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapCodeEtapeIdUsrEtudiant");
+Map<String, ArrayList<String>> MapCodeEtapeNomEtudiant = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapCodeEtapeNomEtudiant");
+Map<String, ArrayList<String>> MapCodeEtapeNumDossier = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapCodeEtapeNumDossier");
+Map<String, ArrayList<String>> MapIdUsrLienRecommandation = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapIdUsrLienRecommandation");
+Map<String, ArrayList<String>>  MapIdUsrEmplacementsForIdCmi = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapIdUsrEmplacementsForIdCmi");
+Map<String, ArrayList<String>>  MapCodeFileColonneFiles = (TreeMap<String, ArrayList<String>>) request.getAttribute("MapCodeFileColonneFiles");
+Map<String, String> MapIdUsrDossierComplet = (TreeMap<String, String>) request.getAttribute("MapIdUsrDossierComplet");
+Map<String, String> MapIdUsrEtudiantTraitement = (TreeMap<String, String>) request.getAttribute("MapIdUsrEtudiantTraitement"); 
+Map<String, String> MapIdUsrEtudiantObservation = (TreeMap<String, String>) request.getAttribute("MapIdUsrEtudiantObservation");
+Map<String, String> MapIdUsrEtudiantProvenance = (TreeMap<String, String>) request.getAttribute("MapIdUsrEtudiantProvenance");
+Map<String, String> MapIdUsrEtudiantAvis = (TreeMap<String, String>) request.getAttribute("MapIdUsrEtudiantAvis");
+Map<String, String> MapLibNomsPcLicNomsPc = (TreeMap<String, String>) request.getAttribute("MapLibNomsPcLicNomsPc");
+Map<String, String> MapLibNomsPsLicNomsPs = (TreeMap<String, String>) request.getAttribute("MapLibNomsPsLicNomsPs");
+String lienDossier = application.getInitParameter("lienDossier");
+String idCmi = request.getAttribute("idCmi").toString(); 
+String libCmi = request.getAttribute("libCmi").toString();
+String filtre = request.getAttribute("filtre").toString();
+String filtreProvenance = request.getAttribute("filtreProvenance").toString();
+String filtreAvis = request.getAttribute("filtreAvis").toString();
+int numPage = Integer.parseInt(request.getAttribute("numPage").toString());
+int nbEtudiantsParPage = Integer.parseInt(request.getAttribute("nbEtudiantsParPage").toString());
+%>
+<body  onLoad="check('<%= filtre %>'); check('<%= filtreProvenance %>'); check('<%= filtreAvis %>'); check('<%= nbEtudiantsParPage %>');"></body>
+
+<div id="maPage" class="salahddine_welcomeInfoFirstConnexion2" >
+
+<%@ include file="filtre.jsp" %>
+<%@ include file="checkFichiers.jsp" %>
+<%!
+public ArrayList<String> listIdUsrEtdiantSurPage(ArrayList<String> listIdUsrEtudiant, ArrayList<String> listDesEtudiantsAAffiche, ArrayList<String> listDesEtudiantsAAfficheParProvenance, ArrayList<String> listDesEtudiantsAAfficheParAvis, ArrayList<String> listIdUsrNoFileUploaded, String filtre, String filtreProvenance, String filtreAvis){
+	ArrayList<String> listIdUsrEtudiantAffiche = new ArrayList<String>();
+	for(String s : listIdUsrEtudiant){
+		
+		if(!filtre.equals("Tout"))
+			if(!listDesEtudiantsAAffiche.contains(s))
+				continue;
+		
+		if(!filtreProvenance.equals("Tout"))
+			if(!listDesEtudiantsAAfficheParProvenance.contains(s))
+				continue;
+		
+		if(!filtreAvis.equals("Tout"))
+			if(!listDesEtudiantsAAfficheParAvis.contains(s))
+				continue;
+				
+		if(listIdUsrNoFileUploaded.contains(s)) {
+			continue;
+		}
+		
+		 listIdUsrEtudiantAffiche.add(s);
+	}
+	return  listIdUsrEtudiantAffiche;
+}
+
+/*public String liensColonne(ArrayList<String> listCodeNomsPc, ArrayList<String> listCodeNomPs, String codeEtape, String codeVet, int i, ArrayList<String> listIdUsrEtdiantSurPage, Map<String, ArrayList<String>> MapCodeEtapeNumDossier, Map<String, ArrayList<String>> MapCodeEtapeIdUsrEtudiant, String lienDossier, ArrayList<String> listEmplacements, int indicePremierEtudiant, int indiceDernierEtudiant) {
+	
+	
+	//recuperer la liste des pieces
+	ArrayList<String> listCodeNomsP = new ArrayList<String>(listCodeNomsPc);
+	listCodeNomsP.addAll(listCodeNomPs);
+
+	//recuperer les numeros de dossiers sur page
+	ArrayList<String> listNumDossierAffiche = new ArrayList<String>();
+	//for(String s : listIdUsrEtdiantSurPage)
+	//	listNumDossierAffiche.add(MapCodeEtapeNumDossier.get(codeEtape).get(MapCodeEtapeIdUsrEtudiant.get(codeEtape).indexOf(s)));
+	for(int j = indicePremierEtudiant ; (j < indiceDernierEtudiant  && j < listIdUsrEtdiantSurPage.size()); j++) {
+		String s = listIdUsrEtdiantSurPage.get(j);
+		listNumDossierAffiche.add(MapCodeEtapeNumDossier.get(codeEtape).get(MapCodeEtapeIdUsrEtudiant.get(codeEtape).indexOf(s)));
+	}	
+	
+	//recuperer les liens pour telecharger
+	String liens = "";
+	for(String s : listNumDossierAffiche){
+		String lien = codeEtape+"-"+codeVet+"/"+s+"/"+listCodeNomsP.get(i);
+		if(new File(lienDossier+lien+".pdf").exists() && listEmplacements.contains(lienDossier+lien+".pdf"))
+			liens += codeEtape+"-"+codeVet+"/"+s+"/"+listCodeNomsP.get(i)+"&";
+	}
+	
+	return liens;
+}*/
+
+public String liensColonne2(Map<String, ArrayList<String>>  MapCodeFileColonneFiles, String codeFile, String lienDossier) {
+	ArrayList<String> listEmplacements = MapCodeFileColonneFiles.get(codeFile);
+	String liens ="";
+	for(String emplacement : listEmplacements){
+		String extention = emplacement.substring(emplacement.lastIndexOf(".") + 1);
+		if(new File(emplacement).exists() && extention.toLowerCase().equals("pdf")) {
+			String lien = emplacement.substring(0, emplacement.lastIndexOf(".")).replaceAll(lienDossier, "");
+			liens += lien + "&";
+		}
+	}
+	return liens;
+}
+
+
+
+public int nbPages(int nbEtudiants, int nbEtudiantParPage) {
+	if(nbEtudiants <= nbEtudiantParPage)
+		return 1;
+	else {
+		if(nbEtudiants % 2 == 0)
+			return (nbEtudiants - (nbEtudiants % nbEtudiantParPage))/nbEtudiantParPage;
+		else
+			return (nbEtudiants - (nbEtudiants % nbEtudiantParPage))/nbEtudiantParPage + 1;
+	}
+}
+%>
+
+
+<%
+
+for(String s : listCodeEtapes){
+	String codeVet = listCodeVets.get(listCodeEtapes.indexOf(s));
+	ArrayList<String> listIdUsrEtdiantSurPage = listIdUsrEtdiantSurPage(MapCodeEtapeIdUsrEtudiant.get(s), listDesEtudiantsAAffiche, listDesEtudiantsAAfficheParProvenance,  listDesEtudiantsAAfficheParAvis, listIdUsrNoFileUploaded, filtre, filtreProvenance, filtreAvis);
+	//out.println(listIdUsrEtdiantSurPage);
+	
+	int nbPages = nbPages(listIdUsrEtdiantSurPage.size(), nbEtudiantsParPage);
+	int indicePremierEtudiant = (numPage - 1) * nbEtudiantsParPage;
+	int indiceDernierEtudiant = indicePremierEtudiant + nbEtudiantsParPage;
+
+	//out.println("<CAPTION><span class=\"section-header-blue\">"+prop.getProperty("etape")+" : "+s+"</span><CAPTION><br>");
+	out.println("<CAPTION><span class=\"section-header-blue\">"+prop.getProperty("commission")+" : "+libCmi+"</span><CAPTION>");
+	
+%>
+
+<%@ include  file="pagination.jsp"%>
+
+<% 
+	
+	
+	out.println("<table style='border-collapse: separate; border-spacing: 2px; border-color: gray;'>");
+	out.println("<tr style='background-color: lightgray;'>");
+/*	
+	//afficher si le dossier est complet
+	out.println("<td>");
+	out.println("Complet");
+	out.println("</td>");
+*/	
+	//provenance + num de dossier + nom prenom + fichiers
+	out.println("<td>");
+	out.println(prop.getProperty("provenance"));
+	out.println("</td>");
+	out.println("<td>");
+	out.println(prop.getProperty("numDossier"));
+	out.println("</td>");
+	out.println("<td>");
+	out.println(prop.getProperty("nomEtPrenom"));
+	out.println("</td>");
+
+	int indiceP = 0;
+	for(String s2 : listLibNomsPc){
+		String libNomPc = new String(s2.toString().getBytes("iso-8859-1"), "utf-8");
+		String licNomPc = MapLibNomsPcLicNomsPc.get(libNomPc);
+		//sauter si le fichier n'est pas a afficher, et le gestionnaire arrive pas la 1ere fois sur la page (listfichiersAAFFICHE = null)
+		if(listFichiersAAffiche != null && !listFichiersAAffiche.contains(listCodeNomsPc.get(listLibNomsPc.indexOf(s2)))){
+			continue;
+		}
+			
+		out.println("<td valign=bottom>"+licNomPc);
+		out.println();
+		
+		//String liensColonne = liensColonne(listCodeNomsPc, MapCodeEtapeCodeNomPs.get(s), s, codeVet, indiceP, listIdUsrEtdiantSurPage, MapCodeEtapeNumDossier, MapCodeEtapeIdUsrEtudiant, lienDossier, listEmplacements, indicePremierEtudiant, indiceDernierEtudiant);
+		String codeFile = listCodeNomsPc.get(listLibNomsPc.indexOf(s2));
+		String liensColonne = liensColonne2(MapCodeFileColonneFiles, codeFile, lienDossier);
+		if(liensColonne.trim().length() != 0){
+			out.println("<form action=\"telechargementMultipleColonne\" method=\"post\" name=\"myform\">");
+			//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+			out.println("<br/><center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+			out.println("<input type=\"hidden\" name=\"liens\" value="+liensColonne+">");
+			out.println("<input type=\"hidden\" name=\"codePiece\" value="+listCodeNomsPc.get(listLibNomsPc.indexOf(s2))+">");
+			out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+			out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+			out.println("</form>");
+		} else {
+			out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+		}
+		
+		out.println("</td>");
+		indiceP++;
+	}
+	for (String s2 : MapCodeEtapeLibNomPs.get(s)){
+		
+		if(listFichiersAAffiche != null && !listFichiersAAffiche.contains(MapCodeEtapeCodeNomPs.get(s).get(MapCodeEtapeLibNomPs.get(s).indexOf(s2)))){
+			continue;
+		}
+		
+		String licNomPs = MapLibNomsPsLicNomsPs.get(s2);
+		String codeFile = MapCodeEtapeCodeNomPs.get(s).get(MapCodeEtapeLibNomPs.get(s).indexOf(s2));
+		out.println("<td  valign=bottom>");
+		out.println(licNomPs);
+		
+		//String liensColonne = liensColonne(listCodeNomsPc, MapCodeEtapeCodeNomPs.get(s), s, codeVet, indiceP, listIdUsrEtdiantSurPage, MapCodeEtapeNumDossier, MapCodeEtapeIdUsrEtudiant, lienDossier, listEmplacements, indicePremierEtudiant, indiceDernierEtudiant);
+		String liensColonne = liensColonne2(MapCodeFileColonneFiles, codeFile, lienDossier);
+		if(liensColonne.trim().length() != 0){
+			out.println("<form action=\"telechargementMultipleColonne\" method=\"post\" name=\"myform\">");
+			//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+			out.println("<br/><center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+			out.println("<input type=\"hidden\" name=\"liens\" value="+liensColonne+">");
+			out.println("<input type=\"hidden\" name=\"codePiece\" value="+MapCodeEtapeCodeNomPs.get(s).get(MapCodeEtapeLibNomPs.get(s).indexOf(s2))+">");
+			out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+			out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+			out.println("</form>");
+		} else {
+			out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+		}
+		out.println("</td>");
+		indiceP++;
+	}
+	
+	//recommandation
+	for (int i = 1; i < 4; i++){
+		out.println("<td>");
+		out.println("Rec"+i);
+		out.println("</td>");
+	}
+	
+	//telecharger toute la ligne
+	out.println("<td>");
+	out.println("Telecharger tout le dossier");
+	out.println("</td>");
+	
+	//Avis
+	out.println("<td>");
+	out.println("<center>"+prop.getProperty("avis")+"</center>");
+	out.println("</td>");
+	
+	//Traitement
+	out.println("<td>");
+	out.println(prop.getProperty("traite"));
+	out.println("</td>");
+	out.println("<td>");
+	out.println("<nobr>");
+	out.println(prop.getProperty("nonTraite"));
+	out.println("</nobr>");
+	out.println("</td>");
+/*	out.println("<td>");
+	out.println("<nobr>");
+	out.println("En cours");
+	out.println("</nobr>");
+	out.println("</td>");
+*/
+	//Observation
+	out.println("<td>");
+	out.println("<center>Observation</center>");
+	out.println("</td>");
+	
+	//mettre à jour
+	out.println("<td>");
+	out.println("<center>Mise à jour</center>");
+	out.println("</td>");
+	
+	out.println("</tr>");
+	//String[] tabExtentions = {".pdf", ".doc", ".doc", ".jpg", ".odt", ".ftp", ".gif", ".jpeg", ".jpe", ".xls", ".xlsx"};
+	String[] tabExtentions = {".pdf", ".xls", ".xlsx"};
+	boolean fileExist;
+	
+//	for (String s2 : MapCodeEtapeIdUsrEtudiant.get(s)){
+	int z = 0;
+	for(int j = indicePremierEtudiant ; (j < indiceDernierEtudiant  && j < listIdUsrEtdiantSurPage.size()); j++) {
+		String s2 = listIdUsrEtdiantSurPage.get(j);
+		z++;
+		//n'afficher que les etudiants qui correspondent au filtres 
+		//ne pas afficher les candidats qui ont rien déposer
+//		if(!listIdUsrEtdiantSurPage.contains(s2))
+//			continue;
+		
+		if(z%2 != 0)
+			out.println("<tr style='background-color: ghostwhite;'>");
+		else
+			out.println("<tr style='background-color: lightgray;'>");
+
+/*
+		//afficher si le dossier est complet
+		if(MapIdUsrDossierComplet.get(s2).equals("Complet")){
+			out.println("<td bgcolor=\"#40FF00\">");
+			out.println(MapIdUsrDossierComplet.get(s2));
+		} else {
+			if(MapIdUsrDossierComplet.get(s2).equals("Incomplet")) {
+				out.println("<td bgcolor=\"#F7FE2E\">");
+				out.println(MapIdUsrDossierComplet.get(s2));
+			} else {
+				out.println("<td bgcolor=\"red\">");
+				out.println(MapIdUsrDossierComplet.get(s2));
+			}
+		}
+		out.println("</td>");
+*/			
+		
+		out.println("<td>");
+		out.println(MapIdUsrEtudiantProvenance.get(s2));
+		out.println("</td>");
+		out.println("<td>");
+		out.println(MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)));
+		out.println("</td>");
+		out.println("<td>");
+		out.println(MapCodeEtapeNomEtudiant.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)));
+		out.println("</td>");
+
+		String liens = "";
+/*		for(String s3 : listCodeNomsPc){
+			
+			//sauter si le fichier n'est pas a afficher, et le gestionnaire arrive pas la 1ere fois sur la page (listfichiersAAFFICHE = null)
+			if(listFichiersAAffiche != null && !listFichiersAAffiche.contains(s3)){
+				continue;
+			}
+			
+			out.println("<td>");
+			fileExist = false;
+			for(int i = 0; i < tabExtentions.length; i++){
+				if(new File(lienDossier+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3+tabExtentions[i]).exists() && listEmplacements.contains(lienDossier+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3+tabExtentions[i]))
+					fileExist = true;
+			}
+			if(fileExist){
+				out.println("<form action=\"telechargement\" method=\"post\" name=\"myform\">");
+				//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+				out.println("<center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+				out.println("<input type=\"hidden\" name=\"lien\" value="+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3+">");
+				out.println("<input type=\"hidden\" name=\"nomEtudiant\" value="+MapCodeEtapeNomEtudiant.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)).replaceAll(" ", "_")+">");
+				out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+				out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+				liens += s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3 + "&";
+				out.println("</form>");
+			} else {
+				out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+			}
+			out.println("</td>");
+		}
+		for(String s3 : MapCodeEtapeCodeNomPs.get(s)){
+			
+			if(listFichiersAAffiche != null && !listFichiersAAffiche.contains(s3)){
+				continue;
+			}
+			
+			out.println("<td>");
+			fileExist = false;
+			for(int i = 0; i < tabExtentions.length; i++){
+				if(new File(lienDossier+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3+tabExtentions[i]).exists() && listEmplacements.contains(lienDossier+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3+tabExtentions[i]))
+					fileExist = true;
+			}
+			if(fileExist){
+				out.println("<form action=\"telechargement\" method=\"post\" name=\"myform\">");
+				//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+				out.println("<center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+				out.println("<input type=\"hidden\" name=\"lien\" value="+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3+">");
+				out.println("<input type=\"hidden\" name=\"nomEtudiant\" value="+MapCodeEtapeNomEtudiant.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)).replaceAll(" ", "_")+">");
+				out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+				out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+				liens += s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+s3 + "&";
+				out.println("</form>");
+			} else{
+				out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+			}
+			out.println("</td>");
+		}
+*/		
+
+		for(String codeFile : listCodeFile) {
+			//sauter si le fichier n'est pas a afficher, et le gestionnaire arrive pas la 1ere fois sur la page (listfichiersAAFFICHE = null)
+			if(listFichiersAAffiche != null && !listFichiersAAffiche.contains(codeFile)){
+				continue;
+			}
+			
+			out.println("<td>");
+			fileExist = false;
+			ArrayList<String> listEmplacementsPourIdUsr = MapIdUsrEmplacementsForIdCmi.get(s2);
+			String emplacement = "";
+			for(String lien : listEmplacementsPourIdUsr) {
+				if(lien.contains(codeFile) && new File(lien).exists()) {
+					String extention = lien.substring(lien.lastIndexOf(".") + 1);
+					if(extention.equals("pdf") || extention.equals("xls") || extention.equals("xlsx") ) {
+						fileExist = true;
+						emplacement = lien;
+					}
+				}
+			}
+			if(fileExist) {
+				out.println("<form action=\"telechargement\" method=\"post\" name=\"myform\">");
+				//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+				out.println("<center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+				//out.println("<input type=\"hidden\" name=\"lien\" value="+s+"-"+codeVet+"/"+MapCodeEtapeNumDossier.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2))+"/"+codeFile+">");
+				out.println("<input type=\"hidden\" name=\"nomEtudiant\" value="+MapCodeEtapeNomEtudiant.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)).replaceAll(" ", "_")+">");
+				out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+				out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+				emplacement = emplacement.substring(0, emplacement.lastIndexOf(".")).replaceAll(lienDossier, "");
+				out.println("<input type=\"hidden\" name=\"lien\" value="+emplacement+">");
+				liens += emplacement + "&";
+				out.println("</form>");
+			} else {
+				out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+			}
+			out.println("</td>");
+		}
+
+		//recommandation
+		for(int i = 0; i < 3; i++){
+			out.print("<td>");
+			if(MapIdUsrLienRecommandation.containsKey(s2)){
+				if(MapIdUsrLienRecommandation.get(s2).size() > i){
+					int longueurLienDossier = getServletContext().getInitParameter("lienDossier").length();
+					out.println("<form action=\"telechargement\" method=\"post\" name=\"myform\">");
+					//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+					out.println("<center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+					out.println("<input type=\"hidden\" name=\"lien\" value="+MapIdUsrLienRecommandation.get(s2).get(i).substring(longueurLienDossier, MapIdUsrLienRecommandation.get(s2).get(i).lastIndexOf("."))+">");
+					out.println("<input type=\"hidden\" name=\"nomEtudiant\" value="+MapCodeEtapeNomEtudiant.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)).replaceAll(" ", "_")+">");
+					out.println("<input type=\"hidden\" name=\"type\" value=recommandation>");
+					out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+					out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+					liens += MapIdUsrLienRecommandation.get(s2).get(i).substring(longueurLienDossier, MapIdUsrLienRecommandation.get(s2).get(i).lastIndexOf(".")) + "&";
+					out.println("</form>");
+				} else {
+					out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+				}
+			} else {
+				out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+			}
+			out.print("</td>");
+		}
+		
+		
+		//telecharger tout le dossier
+		String[] tabLiens = liens.split("&");
+		boolean aucunPDF = true;
+		for(int i = 0; i < tabLiens.length; i++) {
+			if(new File(lienDossier+tabLiens[i]+".pdf").exists())
+				aucunPDF = false;
+		}
+		
+		
+		out.println("<td>");
+		if(!aucunPDF) {
+			
+			out.println("<form action=\"telechargementMultiple\" method=\"post\" name=\"myform\">");
+			//out.println("<center><input type=\"submit\" name=\"telecharger\" value=\"telecharger\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+			out.println("<center><input type=\"submit\" class=\"iconeTelecharger\" name=\"telecharger\" value=\"\" /></center>");
+			out.println("<input type=\"hidden\" name=\"liens\" value="+liens+">");
+			out.println("<input type=\"hidden\" name=\"nomEtudiant\" value="+MapCodeEtapeNomEtudiant.get(s).get(MapCodeEtapeIdUsrEtudiant.get(s).indexOf(s2)).replaceAll(" ", "_")+">");
+			out.println("<input type=\"hidden\" name=\"codeEtape\" value="+s+">");
+			out.println("<input type=\"hidden\" name=\"codeVet\" value="+codeVet+">");
+			out.println("</form>");
+			
+		} else {
+			out.print("<center><p><span class=\"portlet-section-text\"><img src=\"./image/button_cancel.png\"></img></span></p></center>");
+		}
+		out.println("</td>");
+		
+		//Avis
+		out.println("<td>");
+		out.println("<nobr><center>"+MapIdUsrEtudiantAvis.get(s2)+"</center></nobr>");
+		out.println("</td>");
+		
+		out.println("<form action=\"miseAJour\" method=\"post\" name=\"myform\">");
+		//Traitement 
+		out.print("<td>");
+		if(MapIdUsrEtudiantTraitement.get(s2) != null && MapIdUsrEtudiantTraitement.get(s2).equals("STATE.TRAITE"))
+			out.println("<center><input type=\"radio\" name=\"Traitement\" value=\"STATE.TRAITE\" checked=\"checked\" /></center>");
+		else
+			out.println("<center><input type=\"radio\" name=\"Traitement\" value=\"STATE.TRAITE\" /></center>");
+		out.print("</td>");
+		out.print("<td>");
+		if(MapIdUsrEtudiantTraitement.get(s2) == null || MapIdUsrEtudiantTraitement.get(s2).equals("STATE.NON_TRAITE"))
+			out.println("<center><input type=\"radio\" name=\"Traitement\" value=\"STATE.NON_TRAITE\" checked=\"checked\"/></center>");
+		else
+			out.println("<center><input type=\"radio\" name=\"Traitement\" value=\"STATE.NON_TRAITE\" /></center>");
+		out.print("</td>");
+/*		out.print("<td>");
+		if(MapIdUsrEtudiantTraitement.get(s2) != null && MapIdUsrEtudiantTraitement.get(s2).equals("STATE.EN_COURS_TRAITEMENT"))
+			out.println("<center><input type=\"radio\" name=\"Traitement\" value=\"STATE.EN_COURS_TRAITEMENT\" checked=\"checked\"/></center>");
+		else
+			out.println("<center><input type=\"radio\" name=\"Traitement\" value=\"STATE.EN_COURS_TRAITEMENT\" /></center>");
+		out.print("</td>");
+*/
+		//Observation
+		out.print("<td>");
+		if(MapIdUsrEtudiantObservation.get(s2) != null)
+			out.println("<TEXTAREA name=\"Observation\"  maxlength=\"255\" placeholder=\"Veuillez saisir votre observation\" >"+MapIdUsrEtudiantObservation.get(s2)+"</TEXTAREA>");
+		else
+			out.println("<TEXTAREA name=\"Observation\"  maxlength=\"255\" placeholder=\"Veuillez saisir votre observation\" ></TEXTAREA>");
+		out.println("<input type=\"hidden\" name=\"idUsrEtudiant\" value="+s2+">");
+		out.println("<input type=\"hidden\" name=\"idCmi\" value="+idCmi+">");
+		out.println("<input type=\"hidden\" name=\"libCmi\" value=\""+libCmi+"\">");
+		out.println("<input type=\"hidden\" name=\"filtre\" value=\""+filtre+"\">");
+		out.println("<input type=\"hidden\" name=\"filtreProvenance\" value=\""+filtreProvenance+"\">");
+		out.println("<input type=\"hidden\" name=\"filtreAvis\" value=\""+filtreAvis+"\">");
+		out.println("<input type=\"hidden\" name=\"numPage\" value=\""+numPage+"\">");
+		out.print("<input type='hidden' name='nbEtudiantsParPage' value='"+nbEtudiantsParPage+"' />");
+		out.print("</td>");
+		
+		//mettre à jour
+		out.print("<td>");
+		out.println("<center><input type=\"submit\" name=\"MettreAJour\" value=\"Mettre à jour\" maxlength=\"8\" size=\"10\" class=\"form-button\"></center>");
+		out.print("</td>");
+		out.println("</form>");
+		
+		
+		out.println("</tr>");
+		
+	}
+	out.println("</table>");
+}
+out.println("<form action=\"login\" method=\"post\" name=\"myform\">");
+out.println("<input type=\"submit\" name=\"retour\" value=\""+prop.getProperty("retour")+"\" maxlength=\"8\" size=\"10\" class=\"form-button\">");
+out.println("<input type=\"hidden\" name=\"login\" value="+session.getAttribute("login")+">");
+out.println("</form>");
+
+
+%>
+<!--  <p><span class="section-header-blue"><a href="<%=  prop.getProperty("casLogOut")  %>"><%= prop.getProperty("deconnexion")  %></a></span></p> -->
+</div>
+<%@ include  file="menu.jsp"%>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+function go(select) {
+	select.parentNode.submit();
+}
+function check(filtre) {
+	var elmt = document.getElementById(filtre);
+	if(elmt != null)
+		elmt.selected = "selected";
+}
+</script>

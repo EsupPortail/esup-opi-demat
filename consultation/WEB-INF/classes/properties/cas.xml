@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Pas de / s'il n'y a pas de base_uri, laisser ""-->
+<cas
+  hostname="cas.exemple.fr"
+  port="443"
+  base_uri="/cas"
+  version="2.0"
+/>

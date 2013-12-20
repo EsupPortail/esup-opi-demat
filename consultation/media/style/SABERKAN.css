@@ -1,0 +1,113 @@
+
+@import url("/candidatures/media/style/opiR1_header.css");
+
+@import url("/candidatures/media/style/opiR1_navigation.css");
+
+@import url("/candidatures/media/style/opiR1_global.css");
+
+@import url("/candidatures/media/commons.css");
+
+@import url("/candidatures/media/portlet.css");
+
+/*
+@import url("opiR1_header.css");
+
+@import url("opiR1_navigation.css");
+
+@import url("opiR1_global.css");
+
+@import url("../commons.css");
+
+@import url("../portlet.css");
+*/
+.esup-opiR1 div.salahddine_welcomeInfoFirstConnexion {
+	border: 1px solid #b7b6b6;
+	background-color: #f9f9f9;
+	padding: 5px;
+	width: 390px;
+	height: 120px;
+	text-align: left;
+	margin-left: 35%;
+	margin-right: 35%;
+}
+
+.esup-opiR1 div.salahddine_welcomeInfoFirstConnexion2 {
+	background-color: white;
+	width: 150%;
+	border: 1px solid #CCCCCC;
+	padding: 5px;
+	min-height: 400px;
+background-color: #60c2ec;
+	background-image: url("/candidatures/media/images/mainBody.png");
+background-repeat: repeat-x;
+background-attachment: scroll;
+background-position: 0pt 0pt;
+background-clip: border-box;
+background-origin: padding-box;
+background-size: auto auto;
+}
+
+.esup-opiR1 .section-subheader2 {
+/* MAG */
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+font-size: 60%;
+color: #FFFFFF;
+margin-top: 4px;
+margin-right: 0pt;
+margin-bottom: 4px;
+margin-left: 0pt;
+padding-top: 2px;
+padding-right: 2pt;
+padding-bottom: 2px;
+padding-left: 2pt;
+	background-color: #333333;
+text-transform : none;
+/* MAG */
+}
+
+
+.form 	input[type=submit]{
+	background:url(/consultation/image/icone_modifier.gif) top right no-repeat;
+	width:20px;
+	height: 18px;
+	padding: 0 0 0 10px;
+	cursor: pointer;
+	border:0;
+	
+}
+
+a.rubrique {
+	color: black;
+	font-size: 11px;
+}
+
+a.rubrique:visited {
+	color: black;
+}
+
+a.rubrique:hover{
+	color: black;
+}
+.iconeTelecharger {
+        background:url(/consultation/image/icone_telecharger.png) top right no-repeat;
+        width: 32px;
+        height: 30px;
+        padding: 0 0 0 10px;
+        cursor: pointer;
+        border:1 solid;
+}
+.form-button-gris {
+        color: white;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        background: #B4AF91;
+        border: none;
+        cursor: pointer;
+        margin: 3px;
+}
+
+.form-button-gris:active {
+        color: black;
+}
+

@@ -1,0 +1,75 @@
+.esup-opiR1 div.header {
+	position: relative;
+	padding-left: 0px;
+	padding-top: 0pt;
+	padding-right: 0px;
+	padding-bottom: 0pt;
+	margin-left: 0px;
+	margin-top: 0;
+	margin-right: 0px;
+	margin-bottom: 0pt;
+	width: auto;
+	height: 80px;
+
+}
+
+.esup-opiR1 div.header div.logo {
+	position: absolute;
+	width: 171px;
+	height: 68px;
+	background-image: url("/candidatures/media/images/logo-dauphine.jpg");
+	background-repeat: no-repeat;
+}
+
+.esup-opiR1 div.header div.header_suite {
+	position: relative;
+	left : 200px;
+        width: 171px;
+        height: 68px;
+        background-image: url("/candidatures/media/images/logo-dauphine.jpg");
+        background-repeat: no-repeat;
+
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli {
+	text-align: center;
+	padding-top: 20px;
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli .span_bigTitre {
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.esup-opiR1 div.header div.header_suite div.titreAppli .span_titre {
+	color: #333333;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.esup-opiR1 div.header div.header_suite div.user_displayName {
+	text-align: right;
+	position: absolute;
+	top: 40%;
+}
+
+.esup-opiR1 div.header div.header_suite div.version {
+	text-align: right;
+	position: absolute;
+	top: 65%;
+}
+
+.esup-opiR1 div.header div.header_suite .span_currentUser {
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.esup-opiR1 div.header div.header_suite .span_version {
+	color: #333333;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}

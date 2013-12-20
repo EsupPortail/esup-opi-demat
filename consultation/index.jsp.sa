@@ -1,0 +1,66 @@
+<%@ taglib prefix="cas" uri="http://www.yale.edu/its/tp/castools" %>
+<cas:auth id="user" scope="session"/>
+<html>
+<body>
+Coucou <%=session.getAttribute("user")%> !!!<br>
+
+
+<%@ include  file="header.jsp"%>
+
+
+<div id="maPage" class="div_body">
+<div style="width:100%;text-align:center;">
+			<p><span class="section-header-blue"><%= prop.getProperty("bienvenue")  %></span></p>
+			<p><span class="section-header-blue"><%= prop.getProperty("titre")  %></span></p>
+			<h2><span class="section-header-two-black"></span></h2>
+</div>
+
+<ul>
+<div id ="validation" style="display: none; "><li/>le login est obligatoire</div>
+</ul>
+
+<div class="salahddine_welcomeInfoFirstConnexion">
+	<center><h2><span style="text-align: center;" class="section-subheader"><%= prop.getProperty("titreLogin")  %></span></h2></center>
+	<div>
+		<form action="login" method="post" name="myform" onsubmit='return Verif();' >
+			<center><p><span class="portlet-section-text"><%= prop.getProperty("login")  %><input type="text" name="login" id="login" onblur='verifPseudo(this)' /></span></p></center>
+			<center><p><span class="portlet-section-text"><input type="submit" value="<%= prop.getProperty("buttonConnexion")  %> " maxlength="8" size="10" class="form-button" /></span></p></center>
+		</form>
+	</div>
+	</div>
+	</div>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+function surligne(champ, erreur)
+{
+   if(erreur) {
+      champ.style.backgroundColor = "#fba";
+   } else {
+      champ.style.backgroundColor = "";
+   }
+}
+function verifPseudo(champ)
+{
+   if(champ.value.length == 0)
+   {
+      surligne(champ, true);
+      return false;
+   }
+   else
+   {
+      surligne(champ, false);
+      return true;
+   }
+}
+function Verif() {
+	if (document.getElementById("login").value.length != 0){
+		document.form1.submit();
+		return true;
+	} else {
+		div = document.getElementById("validation");
+	    div.style.display = "block";
+		return false;
+	} 
+}
+</script>
