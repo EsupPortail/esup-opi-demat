@@ -966,7 +966,7 @@ public class ImplementCommandes implements CommandesBDD {
 		Statement stmt1 = null;
 		try {
 			stmt1 = con.createStatement();
-			stmt1.executeUpdate("INSERT INTO `candidatures`.`UPD_EXAMEN_DOSSIER` ( `id_usr_candidat` , `id_usr_membre` , `id_cmi` , `Observations` , `Etat_traitement` , `Date_creation_traitement`, `Date_modification_traitement`) VALUES ( '"+idUsrEtudiant+"', '"+idUsr+"', '"+idCmi+"', '"+observation+"', '"+etat+"', SYSDATE(), SYSDATE())");	
+			stmt1.executeUpdate("INSERT INTO `UPD_EXAMEN_DOSSIER` ( `id_usr_candidat` , `id_usr_membre` , `id_cmi` , `Observations` , `Etat_traitement` , `Date_creation_traitement`, `Date_modification_traitement`) VALUES ( '"+idUsrEtudiant+"', '"+idUsr+"', '"+idCmi+"', '"+observation+"', '"+etat+"', SYSDATE(), SYSDATE())");	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -977,7 +977,7 @@ public class ImplementCommandes implements CommandesBDD {
 		Statement stmt1 = null;
 		try {
 			stmt1 = con.createStatement();
-			stmt1.executeUpdate("Update `candidatures`.`UPD_EXAMEN_DOSSIER` set `Observations`='"+observation+"', `Etat_traitement`='"+etat+"', Date_modification_traitement=SYSDATE() where `id_usr_candidat`='"+idUsrEtudiant+"' and id_usr_membre='"+idUsr+"' and id_cmi='"+idCmi+"'");
+			stmt1.executeUpdate("Update `UPD_EXAMEN_DOSSIER` set `Observations`='"+observation+"', `Etat_traitement`='"+etat+"', Date_modification_traitement=SYSDATE() where `id_usr_candidat`='"+idUsrEtudiant+"' and id_usr_membre='"+idUsr+"' and id_cmi='"+idCmi+"'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

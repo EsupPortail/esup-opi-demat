@@ -413,7 +413,7 @@ public class ImplementCommandes implements CommandesBDD {
 		try {
 			stmt1 = con.createStatement();
 			stmt1.executeUpdate("Delete from "
-					+ "`candidatures`.`UPD_IND_FICHIER`"
+					+ "UPD_IND_FICHIER"
 					+ " where id_usr='"
 					+ idUsr
 					+ "' and id_cmi='"
@@ -434,7 +434,7 @@ public class ImplementCommandes implements CommandesBDD {
 		try {
 			stmt1 = con.createStatement();
 			stmt1.executeUpdate("INSERT INTO"
-								+ " `candidatures`.`UPD_IND_FICHIER`"
+								+ " UPD_IND_FICHIER"
 								+ " (`ID_FICHIER`, `id_usr`, `id_cmi`, `DATE_UPLOAD`, `TYPE_PIECE_JUSTIF`, `Emplacement`)"
 								+ " VALUES "
 								+ "(NULL, '"
@@ -544,7 +544,7 @@ public class ImplementCommandes implements CommandesBDD {
 		Statement stmt1 = null;
 		try {
 			stmt1 = con.createStatement();
-			stmt1.executeUpdate("INSERT INTO `candidatures`.`UPD_REFERENT` (`id_ref`, `mail_ref`, `mdp_ref`, `date_cre_ref`, `dat_mod_ref`, `titre_ref`, `organisme_ref`, `lien_mdp_ref`) VALUES (NULL, '"+mailRef+"', '"+password+"', CURDATE(), CURDATE(), '', '', '')");
+			stmt1.executeUpdate("INSERT INTO `UPD_REFERENT` (`id_ref`, `mail_ref`, `mdp_ref`, `date_cre_ref`, `dat_mod_ref`, `titre_ref`, `organisme_ref`, `lien_mdp_ref`) VALUES (NULL, '"+mailRef+"', '"+password+"', CURDATE(), CURDATE(), '', '', '')");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -556,7 +556,7 @@ public class ImplementCommandes implements CommandesBDD {
 		Statement stmt1 = null;
 		try {
 			stmt1 = con.createStatement();
-			stmt1.executeUpdate("INSERT INTO `candidatures`.`UPD_IND_REFERENT` (`id_usr`, `id_ref`) VALUES ('"+idUsr+"', '"+idRef+"')");
+			stmt1.executeUpdate("INSERT INTO `UPD_IND_REFERENT` (`id_usr`, `id_ref`) VALUES ('"+idUsr+"', '"+idRef+"')");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -637,7 +637,7 @@ public class ImplementCommandes implements CommandesBDD {
 		Statement stmt1 = null;
 		try {
 			stmt1 = con.createStatement();
-			stmt1.executeUpdate("INSERT INTO `candidatures`.`UPD_REFERENT` (`id_ref`, `mail_ref`, `mdp_ref`, `date_cre_ref`, `dat_mod_ref`, titre_ref, organisme_ref, lien_mdp_ref) VALUES (NULL, '"+mail+"', '', CURDATE(), CURDATE(), '', '', '"+lienComplet+"')");
+			stmt1.executeUpdate("INSERT INTO `UPD_REFERENT` (`id_ref`, `mail_ref`, `mdp_ref`, `date_cre_ref`, `dat_mod_ref`, titre_ref, organisme_ref, lien_mdp_ref) VALUES (NULL, '"+mail+"', '', CURDATE(), CURDATE(), '', '', '"+lienComplet+"')");
 			
 		} catch (SQLException e) {
 			System.out.print("erreur");

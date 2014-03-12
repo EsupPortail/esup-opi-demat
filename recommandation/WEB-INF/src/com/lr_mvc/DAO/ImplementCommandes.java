@@ -158,7 +158,7 @@ public class ImplementCommandes implements CommandesBDD {
 		Statement stmt1 = null;
 		try {
 			stmt1 = con.createStatement();
-			stmt1.executeUpdate("UPDATE `candidatures`.`UPD_REFERENT` SET `nom_ref` = '"+nomRef+"', `prenom_ref` = '"+prenomRef+"', titre_ref='"+titreRef+"', organisme_ref='"+fonctionRef+"' WHERE `UPD_REFERENT`.`mail_ref` ='"+adresseMail+"'");
+			stmt1.executeUpdate("UPDATE `UPD_REFERENT` SET `nom_ref` = '"+nomRef+"', `prenom_ref` = '"+prenomRef+"', titre_ref='"+titreRef+"', organisme_ref='"+fonctionRef+"' WHERE `UPD_REFERENT`.`mail_ref` ='"+adresseMail+"'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
